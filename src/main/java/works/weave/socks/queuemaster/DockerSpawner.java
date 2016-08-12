@@ -1,22 +1,17 @@
-package works.weave.socks;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package works.weave.socks.queuemaster;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
-import com.github.dockerjava.api.model.Network;
+import com.github.dockerjava.api.exception.DockerException;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.command.PullImageResultCallback;
-import com.github.dockerjava.core.command.ExecStartResultCallback;
-import com.github.dockerjava.api.exception.DockerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.lang.Exception;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.List;
 
 @Component
 public class DockerSpawner {
