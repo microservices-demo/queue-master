@@ -1,4 +1,4 @@
-package works.weave.socks;
+package works.weave.socks.shipping.entities;
 
 public class Shipment {
 	private String id;
