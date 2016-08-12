@@ -1,4 +1,4 @@
-package works.weave.socks;
+package works.weave.socks.queuemaster.configuration;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import works.weave.socks.queuemaster.ShippingTaskHandler;
 
 @Configuration
 public class ShippingConsumerConfiguration extends RabbitMqConfiguration
