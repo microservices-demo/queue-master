@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ev
+set -e
 
 SCRIPT_DIR=`dirname "$0"`
 SCRIPT_NAME=`basename "$0"`
