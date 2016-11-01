@@ -20,7 +20,8 @@ public class RabbitMqConfiguration
     public ConnectionFactory connectionFactory()
     {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory("rabbitmq");
-        // CachingConnectionFactory connectionFactory = new CachingConnectionFactory("192.168.99.104");
+        connectionFactory.setCloseTimeout(5000);
+        connectionFactory.setConnectionTimeout(5000);
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
         return connectionFactory;
