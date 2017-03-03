@@ -1,6 +1,7 @@
-FROM java:openjdk-8-alpine
+FROM weaveworksdemos/msd-java:latest
 
 WORKDIR /usr/src/app
 COPY *.jar ./app.jar
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar","./app.jar", "--port=80"]
+ENV JAVA_OPTS "-Djava.security.egd=file:/dev/urandom"
+ENTRYPOINT ["/usr/local/bin/java.sh","-jar","./app.jar", "--port=80"]
