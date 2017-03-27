@@ -16,10 +16,14 @@ public class RabbitMqConfiguration
 {
     final static String queueName = "shipping-task";
 
+    @Value("${spring.rabbitmq.host}")
+    private String host;
+
+
     @Bean
     public ConnectionFactory connectionFactory()
     {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("rabbitmq");
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(host);
         connectionFactory.setCloseTimeout(5000);
         connectionFactory.setConnectionTimeout(5000);
         connectionFactory.setUsername("guest");
