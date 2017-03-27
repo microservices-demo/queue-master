@@ -19,7 +19,6 @@ public class RabbitMqConfiguration
     @Value("${spring.rabbitmq.host}")
     private String host;
 
-
     @Bean
     public ConnectionFactory connectionFactory()
     {
