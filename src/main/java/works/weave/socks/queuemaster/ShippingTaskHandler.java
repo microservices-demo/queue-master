@@ -8,11 +8,11 @@ import works.weave.socks.shipping.entities.Shipment;
 public class ShippingTaskHandler {
 
 	@Autowired
-	DockerSpawner docker;
+	//DockerSpawner docker;
 
 	public void handleMessage(Shipment shipment) {
 		System.out.println("Received shipment task: " + shipment.getName());
-		docker.init();
-		docker.spawn();
+		//docker.init();
+		//docker.spawn();
 	}
 }
