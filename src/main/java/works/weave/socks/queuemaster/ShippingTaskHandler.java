@@ -12,7 +12,7 @@ public class ShippingTaskHandler {
 
 	public void handleMessage(Shipment shipment) {
 		System.out.println("Received shipment task: " + shipment.getName());
-		docker.init();
-		docker.spawn();
+		//docker.init();
+		//docker.spawn();
 	}
 }
