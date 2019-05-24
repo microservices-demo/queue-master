@@ -1,9 +1,16 @@
 package works.weave.socks.queuemaster.configuration;
 
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Envelope;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.amqp.rabbit.support.MessagePropertiesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,12 +38,9 @@ public class ShippingConsumerConfiguration extends RabbitMqConfiguration
 	}
 
 	@Bean
-	public SimpleMessageListenerContainer listenerContainer() {
-		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+	public RabbitListenerContainerFactory listenerContainer() {
+		SimpleRabbitListenerContainerFactory container = new SimpleRabbitListenerContainerFactory();
 		container.setConnectionFactory(connectionFactory());
-		container.setQueueNames(this.queueName);
-		container.setMessageListener(messageListenerAdapter());
-
 		return container;
 	}
 

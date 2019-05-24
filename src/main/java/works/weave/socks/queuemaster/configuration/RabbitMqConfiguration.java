@@ -1,6 +1,7 @@
 package works.weave.socks.queuemaster.configuration;
 
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import works.weave.socks.shipping.entities.Shipment;
 
 @Configuration
+@EnableRabbit
 public class RabbitMqConfiguration
 {
     final static String queueName = "shipping-task";
@@ -23,6 +25,7 @@ public class RabbitMqConfiguration
     @Bean
     public ConnectionFactory connectionFactory()
     {
+
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory(host);
         connectionFactory.setCloseTimeout(5000);
         connectionFactory.setConnectionTimeout(5000);
@@ -53,18 +56,4 @@ public class RabbitMqConfiguration
         return typeMapper;
     }
 
-    @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
-    }
-
-    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange("shipping-task-exchange");
-    }
-
-    @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(queueName);
-    }
 }
