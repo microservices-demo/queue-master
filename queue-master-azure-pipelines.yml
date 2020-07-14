@@ -1,0 +1,56 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+variables:
+
+ # Container registry service connection established during pipeline creation
+  dockerfilePath: '**/docker/queue-master/Dockerfile'
+  tag: '$(Build.BuildId)'
+  serviceName: queue-master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+resources:
+  repositories:
+    - repository: microservicesdemo
+      type: github
+      name: northpoint/microservices-demo
+      endpoint: github-svcconn
+
+stages:
+- stage: MavenBuild
+  displayName: Maven Build Stage
+  jobs:
+  - job: JavaBuild 
+  - template: /pipeline-templates/java-build.yaml@microservicesdemo
+    parameters:
+      mavenPomFile: 'pom.xml'
+      jdkVersionOption: 1.8
+      goals: package
+
+- stage: DockerBuildPush 
+  displayName: Docker Build & Push Stage
+  jobs:
+  - job: DockerBuildPush 
+  - template: /pipeline-templates/docker-builddeploy-pipeline.yaml@microservicesdemo  # Template reference
+    parameters:
+      tag: $(tag)
+      acrRepo: $(serviceName)
+      dockerfilePath: $(dockerfilePath)
+      artifact: jar
+      buildContext: $(Build.Repository.LocalPath)
+  
+      
+- stage: HelmDeplo
+  displayName: Helm Deploy
+  jobs:
+  - template: /pipeline-templates/helm-deploy-pipeline.yaml@microservicesdemo
+    parameters:
+      serviceName: $(serviceName)
+      image: $(serviceName):$(tag)
