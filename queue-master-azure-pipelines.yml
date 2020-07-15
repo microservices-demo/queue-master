@@ -11,7 +11,7 @@ variables:
  # Container registry service connection established during pipeline creation
   dockerfilePath: '**/docker/queue-master/Dockerfile'
   tag: '$(Build.BuildId)'
-  serviceName: queue-master
+  serviceName: queuemaster
 
 pool:
   vmImage: 'ubuntu-latest'
