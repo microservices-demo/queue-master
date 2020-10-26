@@ -19,6 +19,7 @@ jobs:
       GROUP: weaveworksdemos 
       COMMIT: ${{ github.sha }}
       REPO: queue-master
+      PYTHONIOENCODING: utf-8
     steps:
     - uses: actions/checkout@v2
 
