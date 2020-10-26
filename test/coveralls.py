@@ -20,7 +20,7 @@ class JavaServices(unittest.TestCase):
                    '-DserviceJobId=' + os.getenv('GITHUB_RUN_ID'),
                    '-Dbranch=' + os.getenv('GITHUB_REF'),
                    '-DpullRequest=' + os.getenv('GITHUB_HEAD_REF'),
-                   '-DserviceName=' + os.getenv('GITHUB'),
+                   '-DserviceName=GITHUB'),
                    'verify',
                    'jacoco:report',
                    'coveralls:report']
