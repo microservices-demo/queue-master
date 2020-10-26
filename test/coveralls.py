@@ -17,15 +17,14 @@ class JavaServices(unittest.TestCase):
                    'maven:3.2-jdk-8',
                    'mvn',
                    '-DrepoToken=' + os.getenv('COVERALLS_TOKEN'),
-                   '-DserviceJobId=' + os.getenv('TRAVIS_JOB_ID'),
-                   '-Dbranch=' + os.getenv('TRAVIS_BRANCH'),
-                   '-DpullRequest=' + os.getenv('TRAVIS_PULL_REQUEST'),
-                   '-DserviceName=' + os.getenv('TRAVIS'),
+                   '-DserviceJobId=' + os.getenv('GITHUB_RUN_ID'),
+                   '-Dbranch=' + os.getenv('GITHUB_REF'),
+                   '-DpullRequest=' + os.getenv('GITHUB_HEAD_REF'),
+                   '-DserviceName=' + os.getenv('GITHUB'),
                    'verify',
                    'jacoco:report',
                    'coveralls:report']
         print(Docker().execute(command))
-
 
 if __name__ == '__main__':
     unittest.main()
