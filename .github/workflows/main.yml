@@ -32,8 +32,18 @@ jobs:
  
     #
     #
-    # Install dependencies
+    # Build
     - run: ./scripts/build.sh
+
+    #
+    #
+    # Unit test
+    - run: ./test/test.sh unit.py
+
+    #
+    #
+    # Component test
+    - run: ./test/test.sh component.py
 
     #
     #
