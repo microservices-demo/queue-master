@@ -33,17 +33,20 @@ jobs:
     #
     #
     # Build
-    - run: ./scripts/build.sh
+    - name: Build jar files
+      run: ./scripts/build.sh
 
     #
     #
     # Unit test
-    - run: ./test/test.sh unit.py
+    - name: Run unit tests
+      run: ./test/test.sh unit.py
 
     #
     #
     # Component test
-    - run: ./test/test.sh component.py
+    - named: Run component tests
+      run: ./test/test.sh component.py
 
     #
     #
@@ -51,20 +54,7 @@ jobs:
     - name: Submit Coveralls
       env:
         COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-      #run: ./test/test.sh coveralls.py
       run: docker run --rm -v ${HOME}/.m2:/root/.m2 -v ${PWD}/test/..:/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-8 mvn -DrepoToken=${COVERALLS_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB verify jacoco:report coveralls:report
-
-    #
-    #
-    # Build docker image for service
-    - name: Build docker image
-      uses: docker/build-push-action@v1
-      with:
-        push: false
-        repository: ${{ env.GROUP }}/${{ env.REPO }}
-        tag_with_ref: true
-        tag_with_sha: true
-        tags: ${{ github.sha }}
 
     #
     #
@@ -78,3 +68,5 @@ jobs:
         repository: ${{ env.GROUP }}/${{ env.REPO }}
         tag_with_ref: true
         tag_with_sha: true
+        path: docker/queue-master
+        dockerfile: docker/queue-master/Dockerfile
