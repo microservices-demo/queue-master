@@ -45,7 +45,7 @@ jobs:
     #
     #
     # Component test
-    - named: Run component tests
+    - name: Run component tests
       run: ./test/test.sh component.py
 
     #
