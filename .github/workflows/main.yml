@@ -54,6 +54,7 @@ jobs:
     - name: Submit Coveralls
       env:
         COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+      if: github.event.pull_request.head.repo.full_name == github.repository
       run: docker run --rm -v ${HOME}/.m2:/root/.m2 -v ${PWD}/test/..:/usr/src/mymaven -w /usr/src/mymaven maven:3.2-jdk-8 mvn -DrepoToken=${COVERALLS_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB verify jacoco:report coveralls:report
 
     #
