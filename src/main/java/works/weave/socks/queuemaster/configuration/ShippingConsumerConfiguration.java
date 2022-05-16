@@ -20,7 +20,7 @@ public class ShippingConsumerConfiguration extends RabbitMqConfiguration
 	@Bean
 	public RabbitTemplate rabbitTemplate() {
 		RabbitTemplate template = new RabbitTemplate(connectionFactory());
-		template.setQueue(this.queueName);
+		template.setDefaultReceiveQueue(this.queueName);
         template.setMessageConverter(jsonMessageConverter());
 		return template;
 	}
