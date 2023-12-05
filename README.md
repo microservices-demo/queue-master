@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/microservices-demo/queue-master/badge.svg?branch=master)](https://coveralls.io/github/microservices-demo/queue-master?branch=master)
 [![](https://images.microbadger.com/badges/image/weaveworksdemos/queue-master.svg)](http://microbadger.com/images/weaveworksdemos/queue-master "Get your own image badge on microbadger.com")
 
-# queue-master
+# DEPRECATED: queue-master
 
 A microservices-demo service that provides reading from the shipping
 queue. It will spawn new docker containers that simulate the shipping
